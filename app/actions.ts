@@ -61,16 +61,18 @@ export async function createSubdomainAction(
     console.log('Redirecting to:', `${protocol}://${sanitizedSubdomain}.${rootDomain}`);
     redirect(`${protocol}://${sanitizedSubdomain}.${rootDomain}`);
     
-  } catch (error) {
+  } catch (error: any) {
     console.error('Error creating subdomain:', error);
     return {
       subdomain,
       icon,
       success: false,
-      error: 'An error occurred while creating the subdomain'
+      error: error.message || 'An error occurred while creating the subdomain'
     };
   }
 }
+
+
 export async function deleteSubdomainAction(
   prevState: any,
   formData: FormData
